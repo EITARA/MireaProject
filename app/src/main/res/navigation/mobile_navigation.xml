@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="ru.mirea.lomako.mireaproject.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="ru.mirea.lomako.mireaproject.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="ru.mirea.lomako.mireaproject.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_brouser"
+        android:name="ru.mirea.lomako.mireaproject.BrouserFragment"
+        android:label="Brouser"
+        tools:layout="@layout/fragment_brouser" />
+    <fragment
+        android:id="@+id/nav_calculate"
+        android:name="ru.mirea.lomako.mireaproject.CalculateFragment"
+        android:label="Calculate"
+        tools:layout="@layout/fragment_calculate" />
+    <fragment
+        android:id="@+id/nav_music"
+        android:name="ru.mirea.lomako.mireaproject.MusicFragment"
+        android:label="Music"
+        tools:layout="@layout/fragment_music" />
+    <fragment
+        android:id="@+id/nav_sensors"
+        android:name="ru.mirea.lomako.mireaproject.SensorsFragment"
+        android:label="Sensors"
+        tools:layout="@layout/fragment_sensors" />
+    <fragment
+        android:id="@+id/nav_camera"
+        android:name="ru.mirea.lomako.mireaproject.CameraFragment"
+        android:label="Camera"
+        tools:layout="@layout/fragment_camera" />
+    <fragment
+        android:id="@+id/nav_dictaphone"
+        android:name="ru.mirea.lomako.mireaproject.DictaphoneFragment"
+        android:label="Dictaphone"
+        tools:layout="@layout/fragment_dictaphone" />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="ru.mirea.lomako.mireaproject.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_histories"
+        android:name="ru.mirea.lomako.mireaproject.HistoriesFragment"
+        android:label="Histories"
+        tools:layout="@layout/fragment_histories" />
+
+</navigation>

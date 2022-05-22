@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_slideshow" />
+        <item
+            android:id="@+id/nav_brouser"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Brouser" />
+        <item
+            android:id="@+id/nav_calculate"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Calculate" />
+        <item
+            android:id="@+id/nav_music"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Music" />
+        <item
+            android:id="@+id/nav_sensors"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Sensors" />
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Camera" />
+        <item
+            android:id="@+id/nav_dictaphone"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Dictaphone" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_histories"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Histories" />
+    </group>
+</menu>
