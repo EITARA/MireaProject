@@ -12,17 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="ru.mirea.lomako.mireaproject.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="ru.mirea.lomako.mireaproject.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-    <fragment
         android:id="@+id/nav_brouser"
         android:name="ru.mirea.lomako.mireaproject.BrouserFragment"
         android:label="Brouser"
@@ -62,5 +51,10 @@
         android:name="ru.mirea.lomako.mireaproject.HistoriesFragment"
         android:label="Histories"
         tools:layout="@layout/fragment_histories" />
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="ru.mirea.lomako.mireaproject.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
 
 </navigation>
