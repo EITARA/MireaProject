@@ -22,11 +22,7 @@ import java.lang.reflect.Array;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = ru.mirea.lomako.mireaproject.CreateAccount.class.getSimpleName();
-    private String userEmail;
-    private String userPassword;
-    private Array createAccountInputsArray;
-    private Button btnCreateAccount2;
-    private EditText etEmail,etPassword,etConfirmPassword;
+    private EditText etEmail,etPassword;
     // START declare_auth
     private FirebaseAuth mAuth;
     @Override
@@ -34,10 +30,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Views
-        btnCreateAccount2=(Button) findViewById(R.id.btnCreateAccount) ;
-        etEmail=(EditText) findViewById(R.id.etEmail);
-        etPassword=(EditText) findViewById(R.id.etPassword);
-        etConfirmPassword=(EditText) findViewById(R.id.etConfirmPassword);
+        etEmail=(EditText) findViewById(R.id.etSignInEmail);
+        etPassword=(EditText) findViewById(R.id.etSignInPassword);
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
     }
@@ -77,11 +71,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
         return valid;
     }
-    private void createAccount(String email, String password) {
 
-        // [START create_user_with_email]
-
-    }
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
@@ -114,15 +104,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 });
         // [END sign_in_with_email]
     }
+    public void onClickLogIN(View view){
+        signIn(etEmail.getText().toString(), etPassword.getText().toString());
+    }
+    public   void  onClickCreateAccount(View view){
+        Intent intent = new Intent(this,CreateAccount.class);
+        startActivity(intent);
+    }
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.btnCreateAccount2) {
-            Intent intent = new Intent(this,CreateAccount.class);
-            startActivity(intent);
-        } else if (i == R.id.btnSignIn) {
-            signIn(etEmail.getText().toString(), etPassword.getText().toString());
-        }else if (i == R.id.btnSignOut) {
+        if (i == R.id.btnSignOut) {
                 signOut();
          }
     }

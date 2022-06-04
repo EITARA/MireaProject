@@ -76,6 +76,10 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
         return valid;
     }
     private void createAccount(String email, String password) {
+        if (etPassword!=etConfirmPassword){Toast.makeText(CreateAccount.this, "Passwords do not match",
+                Toast.LENGTH_SHORT).show();}
+        else
+        {
         Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
@@ -102,39 +106,8 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                     }
                 });
         // [END create_user_with_email]
-    }
-    private void signIn(String email, String password) {
-        Log.d(TAG, "signIn:" + email);
-        if (!validateForm()) {
-            return;
-        }
-        // [START sign_in_with_email]
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(CreateAccount.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                        // [START_EXCLUDE]
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(CreateAccount.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END sign_in_with_email]
-    }
+    }}
+
     @Override
     public void onClick(View v) {
         int i = v.getId();

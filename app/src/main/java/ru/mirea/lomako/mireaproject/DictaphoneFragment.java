@@ -183,7 +183,7 @@ public class DictaphoneFragment extends Fragment {
         Uri newUri = contentResolver.insert(baseUri, values);
         // оповещение системы о новом файле
         getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, newUri));
-        Toast.makeText(getActivity(), "This is progress!",
+        Toast.makeText(getActivity(), "This is a progress!",
                 Toast.LENGTH_SHORT).show();
     }
     private void prepareforRecording() {

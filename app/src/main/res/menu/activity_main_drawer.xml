@@ -6,43 +6,43 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_action_home"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_brouser"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_browser"
             android:title="Brouser" />
         <item
             android:id="@+id/nav_calculate"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_calculate"
             android:title="Calculate" />
         <item
             android:id="@+id/nav_music"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_music"
             android:title="Music" />
         <item
             android:id="@+id/nav_sensors"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_sensors"
             android:title="Sensors" />
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_camera"
             android:title="Camera" />
         <item
             android:id="@+id/nav_dictaphone"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_voicerecorder"
             android:title="Dictaphone" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_settings"
             android:title="Settings" />
         <item
             android:id="@+id/nav_histories"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_book"
             android:title="Histories" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_map"
             android:title="Map" />
     </group>
 </menu>
