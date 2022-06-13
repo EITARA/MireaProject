@@ -54,7 +54,8 @@ private FloatingActionButton addHistory;
     private Animation fab_mini_hide;
     ArrayList<History> historylist = new ArrayList<History>();
     final String SAVED_Sett_Profile = "saved_sett_profile";
-    static final File dir = new File("/data/data/ru.mirea.lomako.mireaproject/files");
+    final String SAVED_Sett_Path = "saved_sett_path";
+    final File dir = new File("/data/data/ru.mirea.lomako.mireaproject/files/");
     static final String[] EXTENSIONS = new String[]{
             "txt" // and other formats you need
     };
@@ -177,8 +178,6 @@ private FloatingActionButton addHistory;
             @Override
             public void onClick(View v) {
                 FileOutputStream outputStream;
-
-                Toast.makeText(getActivity(), "History saved", Toast.LENGTH_SHORT).show();
                 String fileName = (historyname.getText())+".txt";
                 try {
                     outputStream = getActivity().openFileOutput(fileName, Context.MODE_PRIVATE);
@@ -187,6 +186,7 @@ private FloatingActionButton addHistory;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                Toast.makeText(getActivity(), "History saved", Toast.LENGTH_SHORT).show();
                 ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) savehistory.getLayoutParams();
                 layoutParams.bottomMargin -= (int) (savehistory.getHeight() * 0.25);
                 savehistory.setLayoutParams(layoutParams);
@@ -207,6 +207,8 @@ private FloatingActionButton addHistory;
                 // создаем адаптер
                 adapter.notifyDataSetChanged();
                 // устанавливаем для списка адаптер
+                historyname.setText("");
+                history.setText("");
                 iscreate=false;
             }});
 

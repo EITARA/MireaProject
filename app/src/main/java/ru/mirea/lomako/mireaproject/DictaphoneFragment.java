@@ -2,6 +2,7 @@ package ru.mirea.lomako.mireaproject;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
@@ -56,7 +57,12 @@ public class DictaphoneFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private int RECORD_AUDIO_REQUEST_CODE =123 ;
+    private static final int REQUEST_CODE_PERMISSION = 100;
+    private boolean isWork=false;
+    private String[] PERMISSIONS = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            RECORD_AUDIO
+    };
     private File file;
     public static DictaphoneFragment newInstance(String param1, String param2) {
         DictaphoneFragment fragment = new DictaphoneFragment();
@@ -86,7 +92,16 @@ public class DictaphoneFragment extends Fragment {
             toolbar.setTitle("Voice Recorder");
             toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
            // setSupportActionBar(toolbar);
-
+        int dictaphonePermissionStatus =
+                ContextCompat.checkSelfPermission(getActivity(), RECORD_AUDIO);
+        int storagePermissionStatus = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (dictaphonePermissionStatus == PackageManager.PERMISSION_GRANTED && storagePermissionStatus == PackageManager.PERMISSION_GRANTED) {
+            isWork = true;
+        } else {
+            // Выполняется запрос к пользователь на получение необходимых разрешений
+            ActivityCompat.requestPermissions(getActivity(), new String[] {RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_PERMISSION);
+        }
             linearLayoutRecorder = (LinearLayout) v.findViewById(R.id.linearLayoutRecorder);
             chronometer = (Chronometer) v.findViewById(R.id.chronometerTimer);
             chronometer.setBase(SystemClock.elapsedRealtime());
@@ -95,12 +110,22 @@ public class DictaphoneFragment extends Fragment {
             imageViewPlay = (ImageView) v.findViewById(R.id.imageViewPlay);
             linearLayoutPlay = (LinearLayout) v.findViewById(R.id.linearLayoutPlay);
             seekBar = (SeekBar) v.findViewById(R.id.seekBar);
-
+        isWork = hasPermissions(getActivity(), PERMISSIONS);
+        if (!isWork) {
+            ActivityCompat.requestPermissions(getActivity(), PERMISSIONS,
+                    REQUEST_CODE_PERMISSION);
+        }
             imageViewRecord.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) { if( v == imageViewRecord ){
-                prepareforRecording();
-                startRecording();
+                try {
+                    prepareforRecording();
+                    startRecording();
+                }
+                catch (Exception e) { Toast.makeText(getActivity(), "Ошибка",
+                        Toast.LENGTH_SHORT).show();}
+
             }}  });
             imageViewStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,50 +151,30 @@ public class DictaphoneFragment extends Fragment {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void getPermissionToRecordAudio() {
-        // 1) Use the support library version ContextCompat.checkSelfPermission(...) to avoid
-        // checking the build version since Context.checkSelfPermission(...) is only available
-        // in Marshmallow
-        // 2) Always check for permission (even if permission has already been granted)
-        // since the user can revoke permissions at any time through Settings
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
 
-            // The permission is NOT already granted.
-            // Check if the user has been asked about this permission already and denied
-            // it. If so, we want to give more explanation about why the permission is needed.
-            // Fire off an async request to actually get the permission
-            // This will show the standard permission request dialog UI
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    RECORD_AUDIO_REQUEST_CODE);
-
-        }
-    }
 
     // Callback with the request from calling requestPermissions(...)
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        // Make sure it's our original READ_CONTACTS request
-        if (requestCode == RECORD_AUDIO_REQUEST_CODE) {
-            if (grantResults.length == 3 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[2] == PackageManager.PERMISSION_GRANTED){
-
-                //Toast.makeText(this, "Record Audio permission granted", Toast.LENGTH_SHORT).show();
-
-            } else {
-                Toast.makeText(getActivity(), "You must give permissions to use this app. App is exiting.", Toast.LENGTH_SHORT).show();
-                getActivity().finishAffinity();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_PERMISSION) {
+            // permission granted
+            isWork = grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+        }
+    }
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
             }
         }
-
+        return true;
     }
+
     private void processAudioFile() {
         ContentValues values = new ContentValues(4);
         long current = System.currentTimeMillis();

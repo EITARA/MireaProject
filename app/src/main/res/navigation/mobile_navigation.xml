@@ -56,5 +56,15 @@
         android:name="ru.mirea.lomako.mireaproject.MapFragment"
         android:label="Map"
         tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/nav_room"
+        android:name="ru.mirea.lomako.mireaproject.RoomFragment"
+        android:label="Room"
+        tools:layout="@layout/fragment_room" />
+    <fragment
+        android:id="@+id/nav_retrofit"
+        android:name="ru.mirea.lomako.mireaproject.RetrofitFragment"
+        android:label="Retrofit"
+        tools:layout="@layout/fragment_retrofit" />
 
 </navigation>

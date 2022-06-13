@@ -76,35 +76,38 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
         return valid;
     }
     private void createAccount(String email, String password) {
-        if (etPassword!=etConfirmPassword){Toast.makeText(CreateAccount.this, "Passwords do not match",
-                Toast.LENGTH_SHORT).show();}
+        if (etPassword.getText().toString().equals(etConfirmPassword.getText().toString())){
+            Log.d(TAG, "createAccount:" + email);
+            if (!validateForm()) {
+                return;
+            }
+            // [START create_user_with_email]
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                assert user != null;
+                                user.sendEmailVerification();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(CreateAccount.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
+                        }
+                    });
+        }
         else
         {
-        Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
-            return;
-        }
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            assert user != null;
-                            user.sendEmailVerification();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(CreateAccount.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
+            Toast.makeText(CreateAccount.this, "Passwords do not match",
+                    Toast.LENGTH_SHORT).show();
+
         // [END create_user_with_email]
     }}
 

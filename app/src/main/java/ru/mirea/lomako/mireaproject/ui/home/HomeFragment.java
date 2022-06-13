@@ -1,8 +1,9 @@
 package ru.mirea.lomako.mireaproject.ui.home;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,20 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 import ru.mirea.lomako.mireaproject.Login;
 import ru.mirea.lomako.mireaproject.R;
 import ru.mirea.lomako.mireaproject.databinding.FragmentHomeBinding;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth;
@@ -27,12 +39,9 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
-
+        TextView textView = null;
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         Button logout = binding.btnSignOut;
         mAuth = FirebaseAuth.getInstance();
         logout.setOnClickListener(new View.OnClickListener() {
