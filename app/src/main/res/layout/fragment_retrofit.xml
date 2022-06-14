@@ -7,6 +7,7 @@
     tools:context=".RetrofitFragment">
 
     <TextView
+        style="@style/MyTextStyle"
         android:id="@+id/textView_Retrofit"
         android:layout_width="281dp"
         android:layout_height="192dp"

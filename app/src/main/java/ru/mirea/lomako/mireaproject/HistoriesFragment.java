@@ -214,13 +214,6 @@ private FloatingActionButton addHistory;
 
         return v;
     }
-    public boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
-    }
     private void setInitialData(final File folder) throws IOException {
         if (dir.isDirectory()) { // make sure it's a directory
             for (final File fileEntry : dir.listFiles(TEXT)) {
@@ -240,14 +233,5 @@ private FloatingActionButton addHistory;
 
             }
     }}
-    /* Проверяем внешнее хранилище на доступность чтения */
-    public boolean isExternalStorageReadable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state) ||
-                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-            return true;
-        }
-        return false;
-    }
 
 }

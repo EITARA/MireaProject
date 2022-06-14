@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,8 +20,33 @@ public class Employee {
     public String name;
     public String salary;
     public String address;
+    public String getNameHistory() {
+        return this.name;
+    }
+
+    public void setNameHistory(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return this.salary;
+    }
+
+    public void setAuthor(String author) {
+        this.salary = author;
+    }
+
+    public String getHistoryResource() {
+        return this.address;
+    }
+
+    public void setHistoryResource(String history) {
+        this.address = history;
+    }
     @Dao
     public interface EmployeeDao {
+        @Query("DELETE FROM employee")
+        public void deleteTable();
         @Query("SELECT * FROM employee")
         List<Employee> getAll();
         @Query("SELECT * FROM employee WHERE id = :id")

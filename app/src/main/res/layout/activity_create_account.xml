@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
+        style="@style/MyTextStyle"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
@@ -79,9 +79,9 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/MyTextStyle"
         android:text="or"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnSignIn2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnCreateAccount" />
 
     <Button
+        style="@style/MyTextStyle2"
         android:id="@+id/btnSignIn2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

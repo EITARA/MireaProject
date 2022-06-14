@@ -1,6 +1,7 @@
 package ru.mirea.lomako.mireaproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +29,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        if(preferences.getBoolean("saved_sett_theme",false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Views

@@ -18,7 +18,12 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    <style name="MyTextStyle" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="MyTextStyle2" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
     <style name="Theme.АMireaProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.АMireaProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

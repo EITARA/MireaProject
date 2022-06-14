@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MireaProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1005" />
         <entry key="..\:/MireaProject/app/src/main/res/drawable-v24/record_progress_bar_backgr.xml" value="0.2775" />
+        <entry key="..\:/MireaProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1005" />
+        <entry key="..\:/MireaProject/app/src/main/res/drawable/ic_menu_camera.xml" value="0.1005" />
         <entry key="..\:/MireaProject/app/src/main/res/drawable/record_progress_bar.xml" value="0.2775" />
         <entry key="..\:/MireaProject/app/src/main/res/drawable/show_fab_mini.xml" value="0.1" />
+        <entry key="..\:/MireaProject/app/src/main/res/drawable/side_nav_bar.xml" value="0.1005" />
         <entry key="..\:/MireaProject/app/src/main/res/layout/activity_create_account.xml" value="0.29375" />
         <entry key="..\:/MireaProject/app/src/main/res/layout/activity_login.xml" value="0.3078125" />
         <entry key="..\:/MireaProject/app/src/main/res/layout/activity_main.xml" value="0.3625" />
@@ -15,7 +19,7 @@
         <entry key="..\:/MireaProject/app/src/main/res/layout/fragment_brouser.xml" value="0.3625" />
         <entry key="..\:/MireaProject/app/src/main/res/layout/fragment_calculate.xml" value="0.3625" />
         <entry key="..\:/MireaProject/app/src/main/res/layout/fragment_camera.xml" value="0.34057971014492755" />
-        <entry key="..\:/MireaProject/app/src/main/res/layout/fragment_dictaphone.xml" value="0.1" />
+        <entry key="..\:/MireaProject/app/src/main/res/layout/fragment_dictaphone.xml" value="0.33" />
         <entry key="..\:/MireaProject/app/src/main/res/layout/fragment_histories.xml" value="0.33" />
         <entry key="..\:/MireaProject/app/src/main/res/layout/fragment_home.xml" value="0.2833333333333333" />
         <entry key="..\:/MireaProject/app/src/main/res/layout/fragment_map.xml" value="0.3496376811594203" />
@@ -29,6 +33,7 @@
         <entry key="..\:/MireaProject/app/src/main/res/layout/recording_item_layout.xml" value="0.24251497005988024" />
         <entry key="..\:/MireaProject/app/src/main/res/menu/activity_main_drawer.xml" value="0.3625" />
         <entry key="..\:/MireaProject/app/src/main/res/menu/main.xml" value="0.35104166666666664" />
+        <entry key="..\:/MireaProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1005" />
         <entry key="..\:/MireaProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/MireaProject/app/src/main/res/xml/filepaths.xml" value="0.30416666666666664" />
       </map>
