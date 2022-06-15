@@ -1,79 +1,85 @@
 package ru.mirea.lomako.mireaproject;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import androidx.cardview.widget.CardView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import com.squareup.picasso.Picasso;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.List;
-
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 import ru.mirea.lomako.mireaproject.databinding.FragmentHomeBinding;
-import ru.mirea.lomako.mireaproject.ui.home.HomeViewModel;
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 public class RetrofitFragment extends Fragment {
-    private TextView textView;
-    private FirebaseAuth mAuth;
-    private FragmentHomeBinding binding;
-
+    private TextView courseNameTV, courseTracksTV, courseBatchTV;
+    private ImageView courseIV;
+    private ProgressBar loadingPB;
+    private CardView courseCV;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_retrofit, null);
-        textView = v.findViewById(R.id.textView_Retrofit);
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl("https://rawgit.com/startandroid/data/master/messages/")
-                .build();
-
-        ru.mirea.lomako.mireaproject.RetrofitFragment.WebApi webApi = retrofit.create(ru.mirea.lomako.mireaproject.RetrofitFragment.WebApi.class);
-        Observable<List<Message>> observable = webApi.messages(1);
-        observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Message>>() {
-                    @Override
-                    public void onCompleted() {
-
-                        textView.setText("Completed");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                        textView.setText("onError " + e);
-                    }
-
-                    @Override
-                    public void onNext(List<Message> messages) {
-
-                        textView.setText("onNext " + messages.size());
-                    }
-                });
+        loadingPB = v.findViewById(R.id.idLoadingPB);
+        courseCV = v.findViewById(R.id.idCVCourse);
+        courseNameTV = v.findViewById(R.id.idTVCourseName);
+        courseTracksTV = v.findViewById(R.id.idTVTracks);
+        courseBatchTV = v.findViewById(R.id.idTVBatch);
+        courseIV = v.findViewById(R.id.idIVCourse);
+        getCourse();
         return v;
     }
-    public interface WebApi {
+    private void getCourse() {
 
-        @GET("messages{page}.json")
-        Observable<List<Message>> messages(@Path("page") int page);
+        // on below line we are creating a retrofit
+        // builder and passing our base url
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jsonkeeper.com/b/")
+                // on below line we are calling add Converter
+                // factory as GSON converter factory.
+                .addConverterFactory(GsonConverterFactory.create())
+                // at last we are building our retrofit builder.
+                .build();
+        // below line is to create an instance for our retrofit api class.
+        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+        Call<RecyclerData> call = retrofitAPI.getCourse();
+        call.enqueue(new Callback<RecyclerData>() {
+            @Override
+            public void onResponse(Call<RecyclerData> call, Response<RecyclerData> response) {
+                if (response.isSuccessful()) {
+                    // inside the on response method.
+                    // we are hiding our progress bar.
+                    loadingPB.setVisibility(View.GONE);
+                    // in below line we are making our card
+                    // view visible after we get all the data.
+                    courseCV.setVisibility(View.VISIBLE);
+                    RecyclerData modal = response.body();
+                    // after extracting all the data we are
+                    // setting that data to all our views.
+                    courseNameTV.setText(modal.getCourseName());
+                    courseTracksTV.setText(modal.getcourseLabs());
+                    courseBatchTV.setText(modal.getCourseMode());
+                    Picasso.get().load(modal.getCourseimg()).into(courseIV);
+                    // we are using picasso to load the image from url.
 
-    }}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecyclerData> call, Throwable t) {
+                // displaying an error message in toast
+                Toast.makeText(getActivity(), "Fail to get the data..", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
 
