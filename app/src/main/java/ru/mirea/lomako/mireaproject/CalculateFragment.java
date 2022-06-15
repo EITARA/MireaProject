@@ -44,6 +44,7 @@ public class CalculateFragment extends Fragment {
     TextView infoTextView;
     Button buttonEqual;
     Button buttonClear;
+    Button buttonDot;
     // TODO: Rename parameter arguments, choose names that match
     private String mParam1;
     private String mParam2;
@@ -108,7 +109,14 @@ public class CalculateFragment extends Fragment {
         editText=v.findViewById(R.id.editText);
         infoTextView=v.findViewById(R.id.infoTextView);
         buttonClear=v.findViewById(R.id.buttonClear);
+        buttonDot=v.findViewById(R.id.buttonDot);
         DecimalFormat decimalFormat = new DecimalFormat("#.##########");
+        buttonDot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.setText(editText.getText() + ".");
+            }
+        });
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
